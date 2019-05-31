@@ -36,28 +36,35 @@ final class GifManager {
         
         
         for _ in 1...numberOfGifs {
-        
-        URLSession.shared.dataTask(with: Url) {[weak self] (data,response,error) in
             
-            do {
+            URLSession.shared.dataTask(with: Url) {[weak self] (data,response,error) in
                 
-                   let gifArray  = try JSONDecoder().decode([CatGif].self, from: data ?? Data())
+                do {
+                    
+                    let gifArray  = try JSONDecoder().decode([CatGif].self, from: data ?? Data())
                     
                     self?.gifsList.append(gifArray.first!)
                     
                     let notification = Notification(name: Notification.Name("dataReady"))
                     
                     NotificationCenter.default.post(notification)
-            
-            } catch {
-                print("Something Went wrong while parsing data.")
-            }
-            
-            }.resume()
+                    
+                } catch {
+                    print("Something Went wrong while parsing data.")
+                }
+                
+                }.resume()
             
         }
     }
     
+    func listSize() -> Int {
+        return gifsList.count
+    }
+    
+    func gif(index : Int) -> CatGif {
+        return gifsList[index]
+    }
     
     func printList() {
         
