@@ -22,11 +22,14 @@ final class GifManager {
     static let shared = GifManager()
     
     private var gifsList = [CatGif]()
+    private var textsList = [String]()
+    
     
     func getGifsData(numberOfGifs : Int) {
         
         if !gifsList.isEmpty {
             gifsList.removeAll(keepingCapacity: false)
+            textsList.removeAll(keepingCapacity: false)
         }
         
         let stringUrl = "https://api.thecatapi.com/api/images/get?format=json&type=gif"
@@ -34,26 +37,35 @@ final class GifManager {
             return
         }
         
+        let textStringUrl = "https://loripsum.net/api"
+        guard let textUrl = URL(string: textStringUrl) else {
+            return
+        }
+        
         
         for _ in 1...numberOfGifs {
+        
+        URLSession.shared.dataTask(with: Url) {[weak self] (data,response,error) in
             
-            URLSession.shared.dataTask(with: Url) {[weak self] (data,response,error) in
+            do {
                 
-                do {
-                    
-                    let gifArray  = try JSONDecoder().decode([CatGif].self, from: data ?? Data())
+                   let gifArray  = try JSONDecoder().decode([CatGif].self, from: data ?? Data())
                     
                     self?.gifsList.append(gifArray.first!)
                     
                     let notification = Notification(name: Notification.Name("dataReady"))
                     
                     NotificationCenter.default.post(notification)
-                    
-                } catch {
-                    print("Something Went wrong while parsing data.")
-                }
                 
-                }.resume()
+                    let contents = try String(contentsOf: textUrl)
+                
+                    self?.textsList.append(contents)
+                
+            } catch {
+                print("Something Went wrong while parsing data.")
+            }
+            
+            }.resume()
             
         }
     }
@@ -64,6 +76,10 @@ final class GifManager {
     
     func gif(index : Int) -> CatGif {
         return gifsList[index]
+    }
+    
+    func text(index : Int) -> String {
+        return textsList[index]
     }
     
     func printList() {
