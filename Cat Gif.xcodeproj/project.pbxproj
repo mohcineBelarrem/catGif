@@ -14,6 +14,7 @@
 		B4CA3C7D22A14AAC00F8D097 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4CA3C7B22A14AAC00F8D097 /* LaunchScreen.storyboard */; };
 		B4CA3C8522A14C1C00F8D097 /* GifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CA3C8422A14C1C00F8D097 /* GifManager.swift */; };
 		B4CA3C8722A1699900F8D097 /* GifDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CA3C8622A1699900F8D097 /* GifDetailViewController.swift */; };
+		B4CA3C8922A173DC00F8D097 /* UImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CA3C8822A173DC00F8D097 /* UImage+Gif.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B4CA3C7E22A14AAC00F8D097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4CA3C8422A14C1C00F8D097 /* GifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifManager.swift; sourceTree = "<group>"; };
 		B4CA3C8622A1699900F8D097 /* GifDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifDetailViewController.swift; sourceTree = "<group>"; };
+		B4CA3C8822A173DC00F8D097 /* UImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UImage+Gif.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				B4CA3C7422A14AAA00F8D097 /* ViewController.swift */,
 				B4CA3C8422A14C1C00F8D097 /* GifManager.swift */,
 				B4CA3C8622A1699900F8D097 /* GifDetailViewController.swift */,
+				B4CA3C8822A173DC00F8D097 /* UImage+Gif.swift */,
 				B4CA3C7622A14AAA00F8D097 /* Main.storyboard */,
 				B4CA3C7922A14AAC00F8D097 /* Assets.xcassets */,
 				B4CA3C7B22A14AAC00F8D097 /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 				B4CA3C8522A14C1C00F8D097 /* GifManager.swift in Sources */,
 				B4CA3C7522A14AAA00F8D097 /* ViewController.swift in Sources */,
 				B4CA3C7322A14AAA00F8D097 /* AppDelegate.swift in Sources */,
+				B4CA3C8922A173DC00F8D097 /* UImage+Gif.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
