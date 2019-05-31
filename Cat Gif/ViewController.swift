@@ -12,6 +12,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedIndexPath : IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +67,21 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return cell!
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showGifDetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showGifDetail" {
+            let destination = segue.destination as! GifDetailViewController
+            destination.gif = GifManager.shared.gif(index: selectedIndexPath.section)
+            destination.text = GifManager.shared.text(index: selectedIndexPath.section)
+        }
+    }
+    
     @objc func dataReady() {
         
         DispatchQueue.main.async {
@@ -72,6 +89,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
+    
+    
     
 }
 
