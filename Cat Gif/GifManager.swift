@@ -53,13 +53,14 @@ final class GifManager {
                     
                     self?.gifsList.append(gifArray.first!)
                     
-                    let notification = Notification(name: Notification.Name("dataReady"))
-                    
-                    NotificationCenter.default.post(notification)
-                
                     let contents = try String(contentsOf: textUrl)
                 
                     self?.textsList.append(contents)
+                
+                if self?.gifsList.count == numberOfGifs {
+                    let notification = Notification(name: Notification.Name("dataReady"))
+                    NotificationCenter.default.post(notification)
+                }
                 
             } catch {
                 print("Something Went wrong while parsing data.")
