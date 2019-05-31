@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="catCell" rowHeight="248" id="7nj-EH-E1g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="catCell" rowHeight="248" id="7nj-EH-E1g" customClass="GifCell" customModule="Cat_Gif" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="248"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7nj-EH-E1g" id="Wp4-aH-IEc">
@@ -43,6 +43,9 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dPk-0X-anq">
+                                                    <rect key="frame" x="197" y="73.5" width="20" height="20"/>
+                                                </activityIndicatorView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c2B-p2-aWZ">
                                                     <rect key="frame" x="8" y="21" width="398" height="125"/>
                                                     <constraints>
@@ -58,11 +61,19 @@
                                                 <constraint firstItem="dK0-Al-PgE" firstAttribute="top" secondItem="c2B-p2-aWZ" secondAttribute="bottom" constant="10" id="Kz5-P2-p2f"/>
                                                 <constraint firstItem="c2B-p2-aWZ" firstAttribute="leading" secondItem="Wp4-aH-IEc" secondAttribute="leading" constant="8" id="PaV-2G-b2b"/>
                                                 <constraint firstItem="dK0-Al-PgE" firstAttribute="leading" secondItem="Wp4-aH-IEc" secondAttribute="leading" constant="8" id="RhH-gF-UXC"/>
+                                                <constraint firstItem="dPk-0X-anq" firstAttribute="centerY" secondItem="c2B-p2-aWZ" secondAttribute="centerY" id="btQ-3o-vsU"/>
+                                                <constraint firstItem="dPk-0X-anq" firstAttribute="centerX" secondItem="c2B-p2-aWZ" secondAttribute="centerX" id="dMy-C6-92r"/>
                                                 <constraint firstAttribute="trailing" secondItem="c2B-p2-aWZ" secondAttribute="trailing" constant="8" id="iuz-9O-ok3"/>
                                                 <constraint firstAttribute="trailing" secondItem="cCi-wT-8Cc" secondAttribute="trailing" constant="8" id="oxD-UA-OxC"/>
                                                 <constraint firstItem="c2B-p2-aWZ" firstAttribute="top" secondItem="Wp4-aH-IEc" secondAttribute="topMargin" constant="10" id="sNa-Ym-IA0"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="dPk-0X-anq" id="VtZ-jm-jQ9"/>
+                                            <outlet property="detailLabel" destination="cCi-wT-8Cc" id="yGw-XY-xoZ"/>
+                                            <outlet property="gifImageView" destination="c2B-p2-aWZ" id="v1i-ae-Ugc"/>
+                                            <outlet property="titleLabel" destination="dK0-Al-PgE" id="nKJ-f9-JOP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -105,7 +116,7 @@
                             </textView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Gpo-Pg-fKH">
                                 <rect key="frame" x="188.5" y="256.5" width="37" height="37"/>
-                                <color key="color" red="1" green="0.17259961930000001" blue="0.16896039290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
