@@ -24,6 +24,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var selectedIndexPath : IndexPath!
     
+    var refreshControl : UIRefreshControl!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +36,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        refreshControl = UIRefreshControl()
+        
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+    }
+    
+    @objc @IBAction func refresh(_ sender: Any) {
+        GifManager.shared.getGifsData(numberOfGifs: 100)
+        self.tableView.reloadData()
         
     }
     
@@ -89,6 +103,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
         
     }
