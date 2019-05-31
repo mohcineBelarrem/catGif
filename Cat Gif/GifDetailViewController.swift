@@ -14,6 +14,7 @@ class GifDetailViewController: UIViewController {
     public var text : String!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +23,14 @@ class GifDetailViewController: UIViewController {
         textView.text = text
         
         DispatchQueue.global().async {
+            
             let image = UIImage.gifImageWithURL(gifUrl: self.gif.url)
             
             DispatchQueue.main.async {
                 self.imageView.image = image
-                
+                self.activityIndicator.stopAnimating()
+                self.imageView .isHidden = false
+                self.activityIndicator.isHidden = true
             }
             
         }
