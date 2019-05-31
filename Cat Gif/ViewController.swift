@@ -8,6 +8,16 @@
 
 import UIKit
 
+
+class GifCell : UITableViewCell {
+    
+    @IBOutlet weak var gifImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+}
+
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,28 +49,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "catCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "catCell") as! GifCell
         
         let gif = GifManager.shared.gif(index: indexPath.section)
         
-        let textLabel = cell?.viewWithTag(101) as! UILabel
-        textLabel.text = gif.id
+        cell.titleLabel.text = gif.id
         
-        let subtitleLabel = cell?.viewWithTag(102) as! UILabel
-        subtitleLabel.text = gif.source_url
+        cell.detailLabel.text = gif.source_url
         
         DispatchQueue.global().async {
             
             let image = UIImage.gifImageWithURL(gifUrl: gif.url)
             
                 DispatchQueue.main.async {
-                    let imageview = cell?.viewWithTag(100) as! UIImageView
-                    imageview.image = image
+                    cell.gifImageView.image = image
                    
                 }
         }
         
-        return cell!
+        return cell
     }
     
     
