@@ -51,17 +51,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         DispatchQueue.global().async {
             
-            let url = URL(string:gif.url)
+            let image = UIImage.gifImageWithURL(gifUrl: gif.url)
             
-            if let imageData = try? Data.init(contentsOf: url!),
-                let image = UIImage(data: imageData){
-                
                 DispatchQueue.main.async {
                     let imageview = cell?.viewWithTag(100) as! UIImageView
                     imageview.image = image
                    
                 }
-            }
         }
         
         return cell!

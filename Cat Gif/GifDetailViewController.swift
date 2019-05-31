@@ -22,20 +22,20 @@ class GifDetailViewController: UIViewController {
         textView.text = text
         
         DispatchQueue.global().async {
-            let url = URL(string:self.gif.url)
+            let image = UIImage.gifImageWithURL(gifUrl: self.gif.url)
             
-            if let imageData = try? Data.init(contentsOf: url!),
-                let image = UIImage(data: imageData){
+            DispatchQueue.main.async {
+                self.imageView.image = image
                 
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                    
-                }
             }
+            
         }
+        
     }
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.textView.flashScrollIndicators()
+    }
     
 }
