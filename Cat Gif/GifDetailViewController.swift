@@ -12,18 +12,20 @@ class GifDetailViewController: UIViewController {
     
     public var gif : CatGif!
     public var text : String!
+    public var image : UIImage!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = gif.id
         
-        text = GifManager.shared.text()
+        DispatchQueue.global().async {
         
-        let fullPage = "<!DOCTYPE html> <html> <head> <style> p{font-size: 20px;; text-align: justify;} </style> </head> <h1>\(gif.id)</h1> <body>"+text+"</body></html>"
+        self.text = GifManager.shared.text()
+        
+        let fullPage = "<!DOCTYPE html> <html> <head> <style> p{font-size: 20px;; text-align: justify;} </style> </head> <h1>\(self.gif.id)</h1> <body>"+self.text+"</body></html>"
         
         let htmlData = NSString(string: fullPage).data(using: String.Encoding.utf8.rawValue)
         let options = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html]
@@ -32,20 +34,14 @@ class GifDetailViewController: UIViewController {
                                                        options: options,
                                                        documentAttributes: nil)
         
-        textView.attributedText = attributedString
-        
-        DispatchQueue.global().async {
-            
-            let image = UIImage.gifImageWithURL(gifUrl: self.gif.url)
-            
             DispatchQueue.main.async {
-                self.imageView.image = image
-                self.activityIndicator.stopAnimating()
-                self.imageView .isHidden = false
-                self.activityIndicator.isHidden = true
+                self.textView.attributedText = attributedString
             }
-            
         }
+        
+        
+        self.imageView.image = self.image
+        
         
     }
     
