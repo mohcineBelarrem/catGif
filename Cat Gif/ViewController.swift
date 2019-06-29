@@ -26,6 +26,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var refreshControl : UIRefreshControl!
     
+    var images : [UIImage]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        images = Array(repeating: UIImage(named: "noGif.png")!, count: 100)
+        
         refreshControl = UIRefreshControl()
         
         tableView.refreshControl = refreshControl
@@ -46,6 +49,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @objc @IBAction func refresh(_ sender: Any) {
         GifManager.shared.getGifsData(numberOfGifs: 100)
+        images = Array(repeating: UIImage(named: "noGif.png")!, count: 100)
         self.tableView.reloadData()
         
     }
@@ -73,11 +77,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         DispatchQueue.global().async {
             
-            let image = UIImage.gifImageWithURL(gifUrl: gif.url)
-            
+            let image = UIImage.gifImageWithURL(gifUrl: gif.url) ?? UIImage(named: "noGif")!
+            self.images[indexPath.section] = image
                 DispatchQueue.main.async {
                     cell.gifImageView.image = image
-                   
                 }
         }
         
@@ -95,6 +98,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if segue.identifier == "showGifDetail" {
             let destination = segue.destination as! GifDetailViewController
             destination.gif = GifManager.shared.gif(index: selectedIndexPath.section)
+            destination.image = images[selectedIndexPath.section]
         }
     }
     
