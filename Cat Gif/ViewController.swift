@@ -95,7 +95,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if segue.identifier == "showGifDetail" {
             let destination = segue.destination as! GifDetailViewController
             destination.gif = GifManager.shared.gif(index: selectedIndexPath.section)
-            destination.text = GifManager.shared.text(index: selectedIndexPath.section)
         }
     }
     

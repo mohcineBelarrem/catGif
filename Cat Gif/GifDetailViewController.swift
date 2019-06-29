@@ -21,6 +21,8 @@ class GifDetailViewController: UIViewController {
         
         navigationItem.title = gif.id
         
+        text = GifManager.shared.text()
+        
         let fullPage = "<!DOCTYPE html> <html> <head> <style> p{font-size: 20px;; text-align: justify;} </style> </head> <h1>\(gif.id)</h1> <body>"+text+"</body></html>"
         
         let htmlData = NSString(string: fullPage).data(using: String.Encoding.utf8.rawValue)

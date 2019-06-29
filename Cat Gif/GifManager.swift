@@ -22,23 +22,16 @@ final class GifManager {
     static let shared = GifManager()
     
     private var gifsList = [CatGif]()
-    private var textsList = [String]()
     
     
     func getGifsData(numberOfGifs : Int) {
         
         if !gifsList.isEmpty {
             gifsList.removeAll(keepingCapacity: false)
-            textsList.removeAll(keepingCapacity: false)
         }
         
         let stringUrl = "https://api.thecatapi.com/api/images/get?format=json&type=gif"
         guard let Url = URL(string: stringUrl) else {
-            return
-        }
-        
-        let textStringUrl = "https://loripsum.net/api"
-        guard let textUrl = URL(string: textStringUrl) else {
             return
         }
         
@@ -53,10 +46,6 @@ final class GifManager {
                     
                     self?.gifsList.append(gifArray.first!)
                     
-                    let contents = try String(contentsOf: textUrl)
-                
-                    self?.textsList.append(contents)
-                
                 if self?.gifsList.count == numberOfGifs {
                     let notification = Notification(name: Notification.Name("dataReady"))
                     NotificationCenter.default.post(notification)
@@ -79,8 +68,23 @@ final class GifManager {
         return gifsList[index]
     }
     
-    func text(index : Int) -> String {
-        return textsList[index]
+    func text() -> String {
+        
+        let textStringUrl = "https://loripsum.net/api"
+        guard let textUrl = URL(string: textStringUrl) else {
+            return ""
+        }
+        
+        do {
+        let text = try String(contentsOf: textUrl)
+        return text
+        }
+        
+        catch {
+            return ""
+        }
+        
+        
     }
     
     func printList() {
